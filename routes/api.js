@@ -23,6 +23,15 @@ router.get('/jobs', function (req, res) {
     });
 });
 
+router.get('/jobs/:id', function (req, res) {
+    console.log("initializing get job call");
+    Job.findById(req.params.id,function (err, job) {
+        if (err) {  res.json(err); }
+        
+        res.json(job);
+    });
+});
+
 router.get('/categories', function (req, res) {
     console.log("initializing get all categories call");
     Category.find().exec(function (err, categories) {
