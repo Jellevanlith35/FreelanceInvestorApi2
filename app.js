@@ -18,6 +18,7 @@ var Status = require('./models/status');
 require('./models/data/fillAccountTestData')(mongoose);
 require('./models/data/fillCategoryTestData')(mongoose);
 require('./models/data/fillStatusTestData')(mongoose);
+require('./models/data/fillJobTestData')(mongoose);
 
 var api = require('./routes/api');
 

@@ -8,10 +8,10 @@ function saveCallback(err){
 
 function fillTestStatus(callback){
 	var testData = [
-		{ 
+		{
             "description" : "openstaand"
-        }, 
-        { 
+        },
+        {
             "description" : "gesloten"
         }
 	];
@@ -20,7 +20,7 @@ function fillTestStatus(callback){
 		// Als er nog geen statussen zijn vullen we de testdata
 		if(data.length == 0){
 			console.log('Creating status testdata');
-			
+
 			testData.forEach(function(status){
 				new Status(status).save(saveCallback);
 			});
