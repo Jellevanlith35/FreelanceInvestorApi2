@@ -14,6 +14,16 @@ router.get('/accounts', function (req, res) {
     });
 });
 
+router.get('/accounts/:id', function (req, res) {
+    console.log("initializing get account call");
+    Account.findById(req.params.id,function (err, account) {
+        if (err) {  res.json(err); }
+        
+        res.json(account);
+    });
+});
+
+
 router.get('/jobs', function (req, res) {
     console.log("initializing get all jobs call");
     Job.find().exec(function (err, jobs) {
