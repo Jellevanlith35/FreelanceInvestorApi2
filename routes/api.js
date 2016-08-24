@@ -23,6 +23,15 @@ router.get('/accounts/:id', function (req, res) {
     });
 });
 
+router.post("/accounts/register", function (req, res) {
+    var newAccount = new Account(req.body);
+    newAccount.save(function (err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+})
+
 
 router.get('/jobs', function (req, res) {
     console.log("initializing get all jobs call");
