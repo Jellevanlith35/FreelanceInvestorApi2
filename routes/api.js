@@ -9,7 +9,7 @@ router.get('/accounts', function (req, res) {
     console.log("initializing get all accounts call");
     Account.find().exec(function (err, accounts) {
         if (err) {  res.json(err); }
-        
+
         res.json(accounts);
     });
 });
@@ -18,16 +18,17 @@ router.get('/accounts/:id', function (req, res) {
     console.log("initializing get account call");
     Account.findById(req.params.id,function (err, account) {
         if (err) {  res.json(err); }
-        
+
         res.json(account);
     });
 });
 
+
 router.post("/accounts/register", function (req, res) {
     var newAccount = new Account(req.body);
     newAccount.save(function (err) {
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
+        res.json(
+            (err === null) ? { msg: 'GELUKT' } : { msg: err }
         );
     });
 })
@@ -37,7 +38,7 @@ router.get('/jobs', function (req, res) {
     console.log("initializing get all jobs call");
     Job.find().exec(function (err, jobs) {
         if (err) {  res.json(err); }
-        
+
         res.json(jobs);
     });
 });
@@ -46,7 +47,7 @@ router.get('/jobs/:id', function (req, res) {
     console.log("initializing get job call");
     Job.findById(req.params.id,function (err, job) {
         if (err) {  res.json(err); }
-        
+
         res.json(job);
     });
 });
@@ -55,7 +56,7 @@ router.get('/categories', function (req, res) {
     console.log("initializing get all categories call");
     Category.find().exec(function (err, categories) {
         if (err) {  res.json(err); }
-        
+
         res.json(categories);
     });
 });
@@ -64,7 +65,7 @@ router.get('/status', function (req, res) {
     console.log("initializing get all status call");
     Status.find().exec(function (err, status) {
         if (err) {  res.json(err); }
-        
+
         res.json(status);
     });
 });
