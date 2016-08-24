@@ -25,6 +25,8 @@ router.get('/accounts/:id', function (req, res) {
 
 
 router.post("/accounts/register", function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     var newAccount = new Account(req.body);
     newAccount.save(function (err) {
         res.json(
