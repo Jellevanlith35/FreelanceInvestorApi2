@@ -1,8 +1,8 @@
 var mongoose = require('mongoose'),
 Schema = mongoose.Schema;
-    
+
 console.log('Initializing account schema');
-    
+
 var Account = new Schema({
     firstName: {type: String, required: false},
     insertion: {type: String, required: false},
@@ -23,14 +23,10 @@ var Account = new Schema({
     facebook : {type: Object, required: false},
     google : {type: Object, required: false},
     isOnline: {type: Boolean, required: true},
-    lastLogin: {type: Datetime, required: true},
+    lastLogin: {type: Date, required: true},
     isActive: {type: Boolean, required: true, default:false},
     favouriteAccounts: [],
-    favouriteJobs: [] 
+    favouriteJobs: []
 }, { collection : 'accounts' });
 
 module.exports = mongoose.model('Account', Account);
-
-
-
-

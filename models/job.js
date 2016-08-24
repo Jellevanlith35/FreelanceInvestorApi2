@@ -1,10 +1,11 @@
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
-    
+Schema = mongoose.Schema,
+relationship = require("mongoose-relationship");
+
 console.log('Initializing job schema');
-    
+
 var Job = new Schema({
-    account: { type: ObjectId, ref: 'Account' },
+    account: { type: Schema.ObjectId, ref: 'Account' },
     title: {type: String, required: true},
     description: {type: String, required: true},
     datetime: {type: Date, required: true},
@@ -13,9 +14,8 @@ var Job = new Schema({
     location: {type: String, required: true},
     url: {type: String, required: false},
     period: {type: String, required: false},
-    category: { type: ObjectId, ref: 'Category' },
-    status: { type: ObjectId, ref: 'Status' },
+    category: { type: Schema.ObjectId, ref: 'Category' },
+    status: { type: Schema.ObjectId, ref: 'Status' },
 }, { collection : 'jobs' });
 
 module.exports = mongoose.model('Job', Job);
-
