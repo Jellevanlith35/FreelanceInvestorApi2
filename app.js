@@ -22,6 +22,15 @@ var Status = require('./models/status');
 // require('./models/data/fillJobTestData')(mongoose);
 
 var app = express();
+
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
+
+ 
+
 var server = http.createServer(app);
 var io = require('socket.io')({
   transports  : ['xhr-polling'],
