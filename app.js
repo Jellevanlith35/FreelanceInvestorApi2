@@ -1,7 +1,8 @@
 var express = require('express');
+var http = require('http');
+var logger = require('morgan');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -20,9 +21,14 @@ var Status = require('./models/status');
 // require('./models/data/fillStatusTestData')(mongoose);
 // require('./models/data/fillJobTestData')(mongoose);
 
-var api = require('./routes/api');
-
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io')({
+  transports  : ['xhr-polling'],
+  polling_duration  : [10]
+}).listen(server);
+
+var api = require('./routes/api');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -34,6 +40,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Heroku won't actually allow us to use WebSockets
+// so we have to setup polling instead.
+// https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+// io.configure(function () {
+//   io.set("transports", ["xhr-polling"]);
+//   io.set("polling duration", 10);
+// });
+
+var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
+server.listen(port, function() {
+  console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
+});
 
 app.use('/api', api);
 
@@ -59,6 +78,15 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+
+io.sockets.on('connection', function (socket) {
+  io.sockets.emit('status', { status: status }); // note the use of io.sockets to emit but socket.on to listen
+  socket.on('reset', function (data) {
+    status = "War is imminent!";
+    io.sockets.emit('status', { status: status });
+  });
 });
 
 module.exports = app;
