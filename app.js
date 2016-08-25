@@ -22,15 +22,6 @@ var Status = require('./models/status');
 // require('./models/data/fillJobTestData')(mongoose);
 
 var app = express();
-
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
-
- 
-
 var server = http.createServer(app);
 var io = require('socket.io')({
   transports  : ['xhr-polling'],
@@ -58,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   io.set("polling duration", 10);
 // });
 
-var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
+var port = 3000 || 5000; // Use the port that Heroku provides or default to 5000
 server.listen(port, function() {
   console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
 });
