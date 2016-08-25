@@ -30,7 +30,7 @@ router.post("/accounts/register", function (req, res) {
     var newAccount = new Account(req.body);
     newAccount.save(function (err) {
         res.json(
-            (err === null) ? { msg: 'GELUKT' } : { msg: err }
+            (err === null) ? { msg: '' } : { msg: err }
         );
     });
 })
@@ -53,6 +53,17 @@ router.get('/jobs/:id', function (req, res) {
         res.json(job);
     });
 });
+
+router.post("/jobs/create", function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    var newJob = new Job(req.body);
+    newJob.save(function (err) {
+        res.json(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+})
 
 router.get('/categories', function (req, res) {
     console.log("initializing get all categories call");
