@@ -84,7 +84,7 @@ app.use(function(err, req, res, next) {
 io.sockets.on('connection', function (socket) {
   io.sockets.emit('status', { status: status }); // note the use of io.sockets to emit but socket.on to listen
   socket.on('reset', function (data) {
-    status = "War is imminent!";
+    status = "Test status!";
     io.sockets.emit('status', { status: status });
   });
 });
