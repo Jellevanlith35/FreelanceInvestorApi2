@@ -42,6 +42,7 @@ router.post("/accounts/validate/login", function (req, res) {
     {
       if (err) {  res.json(err); }
 
+      console.log(res);
       if(account == null)
         res.json(false);
 

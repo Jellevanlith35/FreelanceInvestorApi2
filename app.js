@@ -50,9 +50,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 
 var port = 3000 || 5000; // Use the port that Heroku provides or default to 5000
-server.listen(port, function() {
-  console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
-});
+// server.listen(port, function() {
+//   console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
+// });
 
 app.use('/api', api);
 
