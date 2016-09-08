@@ -38,12 +38,12 @@ router.post("/accounts/register", function (req, res) {
 router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    Account.find({emailaddress: req.body.emailaddress, password:req.body.password}, function(err, user)
+    Account.find({emailaddress: req.body.emailaddress, password:req.body.password}, function(err, account)
     {
       if(err)
         res.json(false);
 
-      res.json(true);
+      res.json(req.body);
     });
 });
 
