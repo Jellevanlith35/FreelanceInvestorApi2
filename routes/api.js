@@ -42,11 +42,10 @@ router.post("/accounts/validate/login", function (req, res) {
     {
       if (err) {  res.json(err); }
 
-      console.log(res);
-      if(account == null)
+      if(account.length == 0)
         res.json(false);
-
-      res.json(account);
+      else
+        res.json(true);
     });
 });
 
