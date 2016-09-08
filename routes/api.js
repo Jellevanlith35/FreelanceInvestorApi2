@@ -39,7 +39,7 @@ router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.json(res);
-    Account.find({emailaddress: req.body.emailaddress, password:req.body.password}, function(err, account)
+    Account.find({emailaddress: req.body.emailaddress, password:req.body.password}).exec(function(err, account)
     {
       if (err) {  res.json(err); }
 
