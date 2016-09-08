@@ -38,7 +38,6 @@ router.post("/accounts/register", function (req, res) {
 router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.json(res);
     Account.find({emailaddress: req.body.emailaddress, password:req.body.password}).exec(function(err, account)
     {
       if (err) {  res.json(err); }
@@ -46,7 +45,7 @@ router.post("/accounts/validate/login", function (req, res) {
       if(account == null)
         res.json(false);
 
-      res.json(true);
+      res.json(account);
     });
 });
 
