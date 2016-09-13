@@ -7,7 +7,7 @@ var Status = require('mongoose').model('Status');
 
 router.get('/accounts', function (req, res) {
     console.log("initializing get all accounts call");
-    Account.find().exec(function (err, accounts) {
+    Account.find().select('-password -emailaddress').exec(function (err, accounts) {
         if (err) {  res.json(err); }
 
         res.json(accounts);
@@ -16,7 +16,7 @@ router.get('/accounts', function (req, res) {
 
 router.get('/accounts/:id', function (req, res) {
     console.log("initializing get account call");
-    Account.findById(req.params.id,function (err, account) {
+    Account.findById(req.params.id).select('-password -emailaddress').exec(function (err, account) {
         if (err) {  res.json(err); }
 
         res.json(account);
