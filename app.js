@@ -14,6 +14,7 @@ var Account = require('./models/account');
 var Job = require('./models/job');
 var Category = require('./models/category');
 var Status = require('./models/status');
+var AccountJob = require('./models/accountJob');
 
 // Test data
  require('./models/data/fillAccountTestData')(mongoose);
