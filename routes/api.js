@@ -53,7 +53,7 @@ router.post("/accounts/validate/login", function (req, res) {
 
 router.get('/jobs', function (req, res) {
     console.log("initializing get all jobs call");
-    Job.find().populate('Account').exec(function (err, jobs) {
+    Job.find().exec(function (err, jobs) {
         if (err) {  res.json(err); }
 
         res.json(jobs);
