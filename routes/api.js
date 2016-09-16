@@ -85,9 +85,12 @@ router.post("/jobs/enroll", function (req, res) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     var newAccountJob = new AccountJob(req.body);
     newAccountJob.save(function (err) {
-        res.json(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
+
+      res.json(newAccountJob);
+      
+        // res.json(
+        //     (err === null) ? { msg: '' } : { msg: err }
+        // );
     });
 });
 
