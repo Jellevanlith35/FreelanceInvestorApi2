@@ -4,7 +4,7 @@ var Account = require('mongoose').model('Account');
 var Job = require('mongoose').model('Job');
 var Category = require('mongoose').model('Category');
 var Status = require('mongoose').model('Status');
-var AccountJob = require('mongoose').model('AccountJob');
+var Accountjob = require('mongoose').model('Accountjob');
 
 router.get('/accounts', function (req, res) {
     console.log("initializing get all accounts call");
@@ -83,14 +83,11 @@ router.post("/jobs/create", function (req, res) {
 router.post("/jobs/enroll", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    var newAccountJob = new AccountJob(req.body);
-    newAccountJob.save(function (err) {
-
-      res.json(newAccountJob);
-      
-        // res.json(
-        //     (err === null) ? { msg: '' } : { msg: err }
-        // );
+    var newAccountjob = new Accountjob(req.body);
+    newAccountjob.save(function (err) {
+        res.json(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
     });
 });
 
