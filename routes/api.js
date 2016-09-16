@@ -83,10 +83,7 @@ router.post("/jobs/create", function (req, res) {
 router.post("/jobs/enroll", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    var newAccountJob = new AccountJob({
-      account: req.body.account,
-      job: req.body.job
-    });
+    var newAccountJob = new AccountJob(req.body);
     newAccountJob.save(function (err) {
         res.json(
             (err === null) ? { msg: '' } : { msg: err }
