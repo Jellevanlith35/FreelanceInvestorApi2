@@ -46,7 +46,8 @@ router.post("/accounts/validate/login", function (req, res) {
           res.json(false);
         else {
           account.comparePassword(req.body.password, function(passwordError, isMatch) {
-              if (passwordError) { res.json(passwordError); }
+              if (passwordError) { res.json(false); }
+              
               res.json(isMatch);
           });
         }
