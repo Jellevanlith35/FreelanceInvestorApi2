@@ -39,14 +39,14 @@ router.post("/accounts/register", function (req, res) {
 router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    Account.find({ emailaddress: req.body.emailaddress }, function(accountError, account) {
-        if (accountError) { res.json(accountError); }
+    Account.find({ emailaddress: req.body.emailaddress }, function(err, account) {
+        if (err) { res.json(err); }
 
         if(account.length == 0 || account == null)
           res.json(false);
         else {
-          account.comparePassword(req.body.password, function(passwordError, isMatch) {
-              if (passwordError) { res.json(passwordError); }
+          account.comparePassword(req.body.password, function(err, isMatch) {
+              if (err) { res.json(err); }
 
               res.json(isMatch);
           });
