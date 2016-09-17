@@ -42,13 +42,15 @@ router.post("/accounts/validate/login", function (req, res) {
     Account.findOne({ emailaddress: req.body.emailaddress }, function(accountError, account) {
         if (accountError) { res.json(accountError); }
 
-        if(account.length == 0)
+        if(account.length == 0 || account == null)
           res.json(false);
-
-        account.comparePassword(req.body.password, function(passwordError, isMatch) {
-            if (passwordError) { res.json(passwordError); }
-            res.json(isMatch);
-        });
+        else {
+          account.comparePassword(req.body.password, function(passwordError, isMatch) {
+              if (passwordError) { res.json(passwordError); }
+              res.json(isMatch);
+          });
+        }
+        
     });
 });
 
