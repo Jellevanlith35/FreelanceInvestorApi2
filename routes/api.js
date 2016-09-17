@@ -39,7 +39,7 @@ router.post("/accounts/register", function (req, res) {
 router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    Account.findOne({ emailaddress: req.body.emailaddress }, function(accountError, account) {
+    Account.find({ emailaddress: req.body.emailaddress }, function(accountError, account) {
         if (accountError) { res.json(accountError); }
 
         if(account.length == 0 || account == null)
@@ -50,7 +50,7 @@ router.post("/accounts/validate/login", function (req, res) {
               res.json(isMatch);
           });
         }
-        
+
     });
 });
 
