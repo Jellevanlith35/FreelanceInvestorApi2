@@ -45,7 +45,7 @@ router.post("/accounts/validate/login", function (req, res) {
         if(account.length == 0 || account == null)
           res.json(false);
         else {
-          account.comparePassword(req.body.password, function(err, isMatch) {
+          account.comparePassword("test12345", function(err, isMatch) {
               if (err) { res.json(err); }
 
               res.json(isMatch);
@@ -53,7 +53,6 @@ router.post("/accounts/validate/login", function (req, res) {
         }
 
         // res.json(true);
-
 
     });
 });
