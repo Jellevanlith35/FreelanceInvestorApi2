@@ -52,7 +52,7 @@ Account.methods.comparePassword = function(candidatePassword, cb) {
         if (err) return cb(err, false);
         cb(null, isMatch);
     });
-    
+
 };
 
 module.exports = mongoose.model('Account', Account);
