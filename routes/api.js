@@ -37,25 +37,23 @@ router.post("/accounts/register", function (req, res) {
 });
 
 router.post("/accounts/validate/login", function (req, res) {
-    // res.header("Access-Control-Allow-Origin", "*");
-    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Account.find({ emailaddress: req.body.emailaddress }, function(accountError, account) {
         if (accountError) { res.json(accountError); }
 
         if(account.length == 0 || account == null)
           res.json(false);
         else {
-          if(account != null)
-          {
-            account.comparePassword(req.body.password, function(passwordError, isMatch) {
-                if (passwordError) { res.json(passwordError); }
+          account.comparePassword(req.body.password, function(passwordError, isMatch) {
+              if (passwordError) { res.json(passwordError); }
 
-                res.json(isMatch);
-            });
-          }
-          else
-            res.json(false);
+              res.json(isMatch);
+          });
         }
+
+        // res.json(true);
+
 
     });
 });
