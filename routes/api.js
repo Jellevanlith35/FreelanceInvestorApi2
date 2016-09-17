@@ -46,11 +46,13 @@ router.post("/accounts/validate/login", function (req, res) {
           res.json(false);
         else {
           account.comparePassword(req.body.password, function(passwordError, isMatch) {
-              if (passwordError) { res.json(false); }
-              
+              if (passwordError) { res.json(passwordError); }
+
               res.json(isMatch);
           });
         }
+
+        res.json(true);
 
     });
 });
