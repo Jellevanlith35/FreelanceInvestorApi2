@@ -49,9 +49,10 @@ Account.pre('save', function(next){
 
 Account.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
+        if (err) return cb(err, false);
         cb(null, isMatch);
     });
+    
 };
 
 module.exports = mongoose.model('Account', Account);
