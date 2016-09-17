@@ -40,12 +40,16 @@ router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-    Account.find({ emailaddress: req.body.emailaddress }, function(accountError, account) {
+    Account.findOne({ emailaddress: req.body.emailaddress }, function(accountError, account) {
         if (accountError) { res.json(accountError); }
+
+        if(account == null)
+          res.json(false);
 
         account.comparePassword(req.body.password, function(passwordError, isMatch) {
             if (passwordError) { res.json(passwordError); }
             res.json(isMatch);
+            
         });
     });
 });
