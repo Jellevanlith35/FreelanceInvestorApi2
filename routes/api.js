@@ -5,6 +5,7 @@ var Job = require('mongoose').model('Job');
 var Category = require('mongoose').model('Category');
 var Status = require('mongoose').model('Status');
 var Accountjob = require('mongoose').model('Accountjob');
+var bcrypt = require('bcrypt');
 
 router.get('/accounts', function (req, res) {
     console.log("initializing get all accounts call");
