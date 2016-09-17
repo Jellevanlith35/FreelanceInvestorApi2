@@ -39,20 +39,17 @@ router.post("/accounts/register", function (req, res) {
 router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    Account.find({ emailaddress: req.body.emailaddress }, function(err, account) {
-        if (err) { res.json(err); }
+    Account.find({ emailaddress: req.body.emailaddress }, function(accountError, foundAccount) {
+        if (accountError) { res.json(accountError); }
 
-        if(account.length == 0 || account == null)
+        if(foundAccount.length == 0 || foundAccount == null)
           res.json(false);
-        else {
-          var match = false;
-          account.comparePassword("test12345", function(err, isMatch) {
-              if (err) { throw err; }
 
-              match = isMatch;
-          });
-          res.json(match);
-        }
+        foundAccount.comparePassword("test12345", function(passwordError, isMatch) {
+            if (passwordError) { res.json(passwordError); }
+
+            res.json(isMatch);
+        });
 
         // res.json(true);
     });
