@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+Schema = mongoose.Schema,
+encrypt = require('mongoose-encrypt');
 
 console.log('Initializing account schema');
 
@@ -28,5 +29,10 @@ var Account = new Schema({
     favouriteAccounts: [],
     favouriteJobs: []
 }, { collection : 'accounts' });
+
+var encKey = process.env.SOME_32BYTE_BASE64_STRING;
+var sigKey = process.env.SOME_64BYTE_BASE64_STRING;
+
+Account.plugin(encrypt, { encryptionKey: encKey, signingKey: sigKey, encryptedFields: ['password'] });
 
 module.exports = mongoose.model('Account', Account);
