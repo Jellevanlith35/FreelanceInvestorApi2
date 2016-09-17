@@ -45,12 +45,13 @@ router.post("/accounts/validate/login", function (req, res) {
         if(account.length == 0 || account == null)
           res.json(false);
         else {
-          res.json(true);
-          // account.comparePassword("test12345", function(err, isMatch) {
-          //     if (err) { res.json(err); }
-          //
-          //     res.json(isMatch);
-          // });
+          var match = false;
+          account.comparePassword("test12345", function(err, isMatch) {
+              if (err) { res.json(err); }
+
+              match = isMatch;
+          });
+          res.json(match);
         }
 
         // res.json(true);
