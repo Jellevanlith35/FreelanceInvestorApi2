@@ -60,6 +60,7 @@ function fillTestAccounts(callback){
 
 	Account.find({}, function(err, data){
 		// Als er nog geen accounts zijn vullen we de testdata
+		console.log(data);
 		if(data.length == 0){
 			console.log('Creating accounts testdata');
 

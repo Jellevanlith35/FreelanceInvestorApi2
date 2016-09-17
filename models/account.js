@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema,
-encrypt = require('mongoose-encrypt');
+Schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
 
 console.log('Initializing account schema');
 
@@ -30,9 +31,20 @@ var Account = new Schema({
     favouriteJobs: []
 }, { collection : 'accounts' });
 
-var encKey = process.env.SOME_32BYTE_BASE64_STRING;
-var sigKey = process.env.SOME_64BYTE_BASE64_STRING;
+Account.pre('save', function(next){
+    var account = this;
+    if (!account.isModified('password')) return next();
 
-Account.plugin(encrypt, { encryptionKey: encKey, signingKey: sigKey, encryptedFields: ['password'] });
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+        if(err) return next(err);
+
+        bcrypt.hash(account.password, salt, function(err, hash){
+            if(err) return next(err);
+
+            account.password = hash;
+            next();
+        });
+    });
+});
 
 module.exports = mongoose.model('Account', Account);

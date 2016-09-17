@@ -14,5 +14,8 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "mongoose": "^4.4.7"
+  },
+  "devDependencies": {
+    "bcrypt": "^0.8.7"
   }
 }
