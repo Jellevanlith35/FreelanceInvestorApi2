@@ -40,12 +40,11 @@ router.post("/accounts/validate/login", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-    Account.find({ emailaddress: req.body.emailaddress }, function(err, account) {
-        if (err) throw err;
+    Account.find({ emailaddress: req.body.emailaddress }, function(accountError, account) {
+        if (accountError) { res.json(accountError); }
 
-        // test a matching password
-        account.comparePassword(req.body.password, function(err, isMatch) {
-            if (err) throw err;
+        account.comparePassword(req.body.password, function(passwordError, isMatch) {
+            if (passwordError) { res.json(passwordError); }
             res.json(isMatch);
         });
     });
