@@ -33,6 +33,9 @@ var Account = new Schema({
 
 Account.pre('save', function(next){
     var account = this;
+
+    if(account.password == null) return next();
+
     if (!account.isModified('password')) return next();
 
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
