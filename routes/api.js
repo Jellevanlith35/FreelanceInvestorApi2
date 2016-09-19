@@ -25,6 +25,8 @@ router.get('/accounts/:id', function (req, res) {
 });
 
 router.put('/accounts/edit/:id', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     console.log("initializing edit account call");
     Account.update({ _id: req.params.id }, req.body, function (err, affected) {
         console.log('affected rows %d', affected);
