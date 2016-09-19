@@ -24,6 +24,15 @@ router.get('/accounts/:id', function (req, res) {
     });
 });
 
+router.put('/accounts/edit/:id', function (req, res) {
+    console.log("initializing edit account call");
+    Account.update({ _id: req.params.id }, req.body, function (err, affected) {
+        console.log('affected rows %d', affected);
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+});
 
 router.post("/accounts/register", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
