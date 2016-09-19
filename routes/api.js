@@ -57,7 +57,7 @@ router.post("/accounts/validate/login", function (req, res) {
           res.json(null);
 
 
-      res.json(foundAccount._id);
+      res.json(foundAccount[0]._id);
 
         // foundAccount.comparePassword("test12345", function(passwordError, isMatch) {
         //     if (passwordError) { res.json(passwordError); }
